@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molecule.Data", "Molecule.Data\Molecule.Data.csproj", "{653F3958-4F05-4496-9FEF-1FEFFA1AF1D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molecule", "Molecule\Molecule.csproj", "{316BC13B-5ABA-4059-844B-457E24D6CC61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{653F3958-4F05-4496-9FEF-1FEFFA1AF1D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653F3958-4F05-4496-9FEF-1FEFFA1AF1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653F3958-4F05-4496-9FEF-1FEFFA1AF1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653F3958-4F05-4496-9FEF-1FEFFA1AF1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316BC13B-5ABA-4059-844B-457E24D6CC61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316BC13B-5ABA-4059-844B-457E24D6CC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316BC13B-5ABA-4059-844B-457E24D6CC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316BC13B-5ABA-4059-844B-457E24D6CC61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20D5D8F4-B70E-4549-B2D8-3030D9FF508C}
+	EndGlobalSection
+EndGlobal

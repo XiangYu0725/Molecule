@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="401ff1c21ccc4349948f301c8de24322" Name="Diagram1" >
+        <EntityTypeShape EntityType="ManagementModel.Person" Width="1.5" PointX="5.5" PointY="0.875" />
+        <EntityTypeShape EntityType="ManagementModel.Teacher" Width="1.5" PointX="3.625" PointY="3.125" />
+        <InheritanceConnector EntityType="ManagementModel.Teacher" />
+        <EntityTypeShape EntityType="ManagementModel.Student" Width="1.5" PointX="5.5" PointY="3.125" />
+        <InheritanceConnector EntityType="ManagementModel.Student" />
+        <EntityTypeShape EntityType="ManagementModel.Parent" Width="1.5" PointX="7.375" PointY="3.125" />
+        <InheritanceConnector EntityType="ManagementModel.Parent" />
+        <AssociationConnector Association="ManagementModel.StudentParent" />
+        <EntityTypeShape EntityType="ManagementModel.Class" Width="1.5" PointX="3.625" PointY="7" />
+        <AssociationConnector Association="ManagementModel.ClassStudent" ManuallyRouted="true" >
+          <ConnectorPoint PointX="5.125" PointY="8.1824446614583337" />
+          <ConnectorPoint PointX="5.676316836812048" PointY="8.1824446614583337" />
+          <ConnectorPoint PointX="5.676316836812048" PointY="5.4898893229166665" />
+        </AssociationConnector>
+        <AssociationConnector Association="ManagementModel.Headmaster" />
+        <AssociationConnector Association="ManagementModel.ClassTeacher" />
+        <EntityTypeShape EntityType="ManagementModel.Exam" Width="1.5" PointX="1.125" PointY="7" />
+        <EntityTypeShape EntityType="ManagementModel.Department" Width="1.5" PointX="0.75" PointY="3.625" />
+        <AssociationConnector Association="ManagementModel.DepartmentTeacher" />
+        <AssociationConnector Association="ManagementModel.DeanOfDepartment" />
+        <AssociationConnector Association="ManagementModel.ClassExam" />
+        <AssociationConnector Association="ManagementModel.ExamTeacher" />
+        <EntityTypeShape EntityType="ManagementModel.ExamResult" Width="1.5" PointX="5.625" PointY="9.5" />
+        <AssociationConnector Association="ManagementModel.ExamExamResult" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

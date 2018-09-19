@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManagementModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ManagementModelStoreContainer">
+    <EntitySet Name="PersonSet" EntityType="ManagementModel.Store.PersonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassSet" EntityType="ManagementModel.Store.ClassSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExamSet" EntityType="ManagementModel.Store.ExamSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartmentSet" EntityType="ManagementModel.Store.DepartmentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExamResultSet" EntityType="ManagementModel.Store.ExamResultSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Student" EntityType="ManagementModel.Store.PersonSet_Student" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Parent" EntityType="ManagementModel.Store.PersonSet_Parent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Teacher" EntityType="ManagementModel.Store.PersonSet_Teacher" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassTeacher" EntityType="ManagementModel.Store.ClassTeacher" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="StudentParent" Association="ManagementModel.Store.StudentParent">
+      <End Role="Student" EntitySet="PersonSet_Student" />
+      <End Role="Parent" EntitySet="PersonSet_Parent" />
+    </AssociationSet>
+    <AssociationSet Name="ClassStudent" Association="ManagementModel.Store.ClassStudent">
+      <End Role="Class" EntitySet="ClassSet" />
+      <End Role="Student" EntitySet="PersonSet_Student" />
+    </AssociationSet>
+    <AssociationSet Name="Headmaster" Association="ManagementModel.Store.Headmaster">
+      <End Role="Class" EntitySet="ClassSet" />
+      <End Role="Teacher" EntitySet="PersonSet_Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassTeacher_Class" Association="ManagementModel.Store.FK_ClassTeacher_Class">
+      <End Role="Class" EntitySet="ClassSet" />
+      <End Role="ClassTeacher" EntitySet="ClassTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassTeacher_Teacher" Association="ManagementModel.Store.FK_ClassTeacher_Teacher">
+      <End Role="Teacher" EntitySet="PersonSet_Teacher" />
+      <End Role="ClassTeacher" EntitySet="ClassTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentTeacher" Association="ManagementModel.Store.DepartmentTeacher">
+      <End Role="Department" EntitySet="DepartmentSet" />
+      <End Role="Teacher" EntitySet="PersonSet_Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="DeanOfDepartment" Association="ManagementModel.Store.DeanOfDepartment">
+      <End Role="Department" EntitySet="DepartmentSet" />
+      <End Role="Teacher" EntitySet="PersonSet_Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="ClassExam" Association="ManagementModel.Store.ClassExam">
+      <End Role="Class" EntitySet="ClassSet" />
+      <End Role="Exam" EntitySet="ExamSet" />
+    </AssociationSet>
+    <AssociationSet Name="ExamTeacher" Association="ManagementModel.Store.ExamTeacher">
+      <End Role="Teacher" EntitySet="PersonSet_Teacher" />
+      <End Role="Exam" EntitySet="ExamSet" />
+    </AssociationSet>
+    <AssociationSet Name="ExamExamResult" Association="ManagementModel.Store.ExamExamResult">
+      <End Role="Exam" EntitySet="ExamSet" />
+      <End Role="ExamResult" EntitySet="ExamResultSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_inherits_Person" Association="ManagementModel.Store.FK_Student_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Student" EntitySet="PersonSet_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parent_inherits_Person" Association="ManagementModel.Store.FK_Parent_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Parent" EntitySet="PersonSet_Parent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_inherits_Person" Association="ManagementModel.Store.FK_Teacher_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Teacher" EntitySet="PersonSet_Teacher" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Level" Type="int" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="Headmaster_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExamSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Subject" Type="int" Nullable="false" />
+    <Property Name="Introduction" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Topic" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Identifier" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="Importance" Type="int" Nullable="false" />
+    <Property Name="Teacher_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepartmentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dean_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExamResultSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Mark" Type="int" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+    <Property Name="Picture" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Birthday" Type="datetime" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Parent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WeChat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondarySubject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+    <Property Name="WorkNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Picture" Type="varbinary(max)" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassTeacher">
+    <Key>
+      <PropertyRef Name="Classes_Id" />
+      <PropertyRef Name="Teachers_Id" />
+    </Key>
+    <Property Name="Classes_Id" Type="int" Nullable="false" />
+    <Property Name="Teachers_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentParent">
+    <End Role="Student" Type="ManagementModel.Store.PersonSet_Student" Multiplicity="1" />
+    <End Role="Parent" Type="ManagementModel.Store.PersonSet_Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parent">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassStudent">
+    <End Role="Class" Type="ManagementModel.Store.ClassSet" Multiplicity="1" />
+    <End Role="Student" Type="ManagementModel.Store.PersonSet_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Headmaster">
+    <End Role="Class" Type="ManagementModel.Store.ClassSet" Multiplicity="*" />
+    <End Role="Teacher" Type="ManagementModel.Store.PersonSet_Teacher" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="Headmaster_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartmentTeacher">
+    <End Role="Department" Type="ManagementModel.Store.DepartmentSet" Multiplicity="1" />
+    <End Role="Teacher" Type="ManagementModel.Store.PersonSet_Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DeanOfDepartment">
+    <End Role="Department" Type="ManagementModel.Store.DepartmentSet" Multiplicity="*" />
+    <End Role="Teacher" Type="ManagementModel.Store.PersonSet_Teacher" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="Dean_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassExam">
+    <End Role="Class" Type="ManagementModel.Store.ClassSet" Multiplicity="1" />
+    <End Role="Exam" Type="ManagementModel.Store.ExamSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExamTeacher">
+    <End Role="Teacher" Type="ManagementModel.Store.PersonSet_Teacher" Multiplicity="1" />
+    <End Role="Exam" Type="ManagementModel.Store.ExamSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="Teacher_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExamExamResult">
+    <End Role="Exam" Type="ManagementModel.Store.ExamSet" Multiplicity="1" />
+    <End Role="ExamResult" Type="ManagementModel.Store.ExamResultSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamResult">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassTeacher_Class">
+    <End Role="Class" Type="ManagementModel.Store.ClassSet" Multiplicity="1" />
+    <End Role="ClassTeacher" Type="ManagementModel.Store.ClassTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassTeacher">
+        <PropertyRef Name="Classes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassTeacher_Teacher">
+    <End Role="ClassTeacher" Type="ManagementModel.Store.ClassTeacher" Multiplicity="*" />
+    <End Role="Teacher" Type="ManagementModel.Store.PersonSet_Teacher" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassTeacher">
+        <PropertyRef Name="Teachers_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_inherits_Person">
+    <End Role="Person" Type="ManagementModel.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Student" Type="ManagementModel.Store.PersonSet_Student" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Parent_inherits_Person">
+    <End Role="Person" Type="ManagementModel.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Parent" Type="ManagementModel.Store.PersonSet_Parent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parent">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_inherits_Person">
+    <End Role="Person" Type="ManagementModel.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teacher" Type="ManagementModel.Store.PersonSet_Teacher" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ManagementModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ManagementModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PersonSet" EntityType="ManagementModel.Person" />
+          <AssociationSet Name="StudentParent" Association="ManagementModel.StudentParent">
+            <End Role="Student" EntitySet="PersonSet" />
+            <End Role="Parent" EntitySet="PersonSet" />
+          </AssociationSet>
+          <EntitySet Name="ClassSet" EntityType="ManagementModel.Class" />
+          <AssociationSet Name="ClassStudent" Association="ManagementModel.ClassStudent">
+            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Student" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="Headmaster" Association="ManagementModel.Headmaster">
+            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Teacher" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="ClassTeacher" Association="ManagementModel.ClassTeacher">
+            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Teacher" EntitySet="PersonSet" />
+          </AssociationSet>
+          <EntitySet Name="ExamSet" EntityType="ManagementModel.Exam" />
+          <EntitySet Name="DepartmentSet" EntityType="ManagementModel.Department" />
+          <AssociationSet Name="DepartmentTeacher" Association="ManagementModel.DepartmentTeacher">
+            <End Role="Department" EntitySet="DepartmentSet" />
+            <End Role="Teacher" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="DeanOfDepartment" Association="ManagementModel.DeanOfDepartment">
+            <End Role="Department" EntitySet="DepartmentSet" />
+            <End Role="Teacher" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="ClassExam" Association="ManagementModel.ClassExam">
+            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Exam" EntitySet="ExamSet" />
+          </AssociationSet>
+          <AssociationSet Name="ExamTeacher" Association="ManagementModel.ExamTeacher">
+            <End Role="Teacher" EntitySet="PersonSet" />
+            <End Role="Exam" EntitySet="ExamSet" />
+          </AssociationSet>
+          <EntitySet Name="ExamResultSet" EntityType="ManagementModel.ExamResult" />
+          <AssociationSet Name="ExamExamResult" Association="ManagementModel.ExamExamResult">
+            <End Role="Exam" EntitySet="ExamSet" />
+            <End Role="ExamResult" EntitySet="ExamResultSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Gender" Type="ManagementModel.Gender" Nullable="false" />
+        </EntityType>
+        <EnumType Name="Gender">
+          <Member Name="Male" />
+          <Member Name="Female" />
+        </EnumType>
+        <EntityType Name="Teacher" BaseType="ManagementModel.Person">
+          <Property Name="Subject" Type="String" Nullable="false" />
+          <Property Name="SecondarySubject" Type="String" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="ManagementModel.SchoolRule" Nullable="false" />
+          <Property Name="WorkNumber" Type="String" Nullable="false" />
+          <Property Name="Picture" Type="Binary" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="HeadmasterOf" Relationship="ManagementModel.Headmaster" FromRole="Teacher" ToRole="Class" />
+          <NavigationProperty Name="Classes" Relationship="ManagementModel.ClassTeacher" FromRole="Teacher" ToRole="Class" />
+          <NavigationProperty Name="Department" Relationship="ManagementModel.DepartmentTeacher" FromRole="Teacher" ToRole="Department" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DeanOf" Relationship="ManagementModel.DeanOfDepartment" FromRole="Teacher" ToRole="Department" />
+          <NavigationProperty Name="Exams" Relationship="ManagementModel.ExamTeacher" FromRole="Teacher" ToRole="Exam" />
+        </EntityType>
+        <EntityType Name="Student" BaseType="ManagementModel.Person">
+          <NavigationProperty Name="Parents" Relationship="ManagementModel.StudentParent" FromRole="Student" ToRole="Parent" />
+          <NavigationProperty Name="Class" Relationship="ManagementModel.ClassStudent" FromRole="Student" ToRole="Class" />
+          <Property Name="ClassId" Nullable="false" Type="Int32" />
+          <Property Name="Role" Type="ManagementModel.ClassRole" Nullable="false" />
+          <Property Name="Picture" Type="Binary" Nullable="false" MaxLength="Max" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parent" BaseType="ManagementModel.Person" >
+          <NavigationProperty Name="Student" Relationship="ManagementModel.StudentParent" FromRole="Parent" ToRole="Student" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="WeChat" Type="String" Nullable="false" />
+          <Property Name="Contact" Type="ManagementModel.ContactMethod" Nullable="false" />
+        </EntityType>
+        <EnumType Name="Subject">
+          <Member Name="Chinese" />
+          <Member Name="Mathematics" />
+          <Member Name="English" />
+          <Member Name="Science" />
+          <Member Name="Moral" />
+          <Member Name="PhysicalEducation" />
+          <Member Name="Music" />
+          <Member Name="Labour" />
+          <Member Name="InformationTech" />
+        </EnumType>
+        <EnumType Name="SchoolRule" IsFlags="true">
+          <Member Name="Principal" />
+          <Member Name="VicePrincipal" />
+          <Member Name="Dean" />
+          <Member Name="DeanOfDepartment" />
+          <Member Name="DeanOfLevel" />
+          <Member Name="Teacher" />
+          <Member Name="DeanOfManagement" />
+          <Member Name="Accountant" />
+          <Member Name="Cashier" />
+          <Member Name="Headmaster" />
+        </EnumType>
+        <Association Name="StudentParent">
+          <End Type="ManagementModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ManagementModel.Parent" Role="Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="ManagementModel.ClassStudent" FromRole="Class" ToRole="Student" />
+          <NavigationProperty Name="Headmaster" Relationship="ManagementModel.Headmaster" FromRole="Class" ToRole="Teacher" />
+          <NavigationProperty Name="Teachers" Relationship="ManagementModel.ClassTeacher" FromRole="Class" ToRole="Teacher" />
+          <NavigationProperty Name="Exams" Relationship="ManagementModel.ClassExam" FromRole="Class" ToRole="Exam" />
+        </EntityType>
+        <Association Name="ClassStudent">
+          <End Type="ManagementModel.Class" Role="Class" Multiplicity="1" >
+          </End>
+          <End Type="ManagementModel.Student" Role="Student" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ClassRole">
+        <Member Name="Monitor" />
+          <Member Name="StudyCommittee" />
+          <Member Name="LifeCommittee" />
+          <Member Name="LabourCommittee" />
+          <Member Name="ArtCommittee" />
+          <Member Name="SportCommittee" />
+          <Member Name="Student" />
+        </EnumType>
+        <Association Name="Headmaster">
+          <End Type="ManagementModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="ManagementModel.Teacher" Role="Teacher" Multiplicity="1" />
+        </Association>
+        <Association Name="ClassTeacher">
+          <End Type="ManagementModel.Class" Role="Class" Multiplicity="*" />
+          <End Type="ManagementModel.Teacher" Role="Teacher" Multiplicity="*" />
+        </Association>
+        <EnumType Name="ContactMethod" >
+          <Member Name="Text" />
+          <Member Name="Phone" />
+          <Member Name="Email" />
+          <Member Name="WeChat" />
+        </EnumType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <Property Name="Subject" Type="ManagementModel.Subject" Nullable="false" />
+          <Property Name="Introduction" Type="String" Nullable="false" />
+          <Property Name="Topic" Type="String" Nullable="false" />
+          <Property Name="Identifier" Type="String" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="ManagementModel.ClassExam" FromRole="Exam" ToRole="Class" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="ManagementModel.ExamTeacher" FromRole="Exam" ToRole="Teacher" />
+          <Property Name="Importance" Type="ManagementModel.Priority" Nullable="false" />
+          <NavigationProperty Name="ExamResults" Relationship="ManagementModel.ExamExamResult" FromRole="Exam" ToRole="ExamResult" />
+        </EntityType>
+        <EnumType Name="ExamType">
+          <Member Name="MidTerm" />
+          <Member Name="Final" />
+          <Member Name="UnitTest" />
+          <Member Name="General" />
+        </EnumType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Teachers" Relationship="ManagementModel.DepartmentTeacher" FromRole="Department" ToRole="Teacher" />
+          <NavigationProperty Name="Dean" Relationship="ManagementModel.DeanOfDepartment" FromRole="Department" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="DepartmentTeacher">
+          <End Type="ManagementModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="ManagementModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DeanOfDepartment">
+          <End Type="ManagementModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="ManagementModel.Teacher" Role="Teacher" Multiplicity="1" />
+        </Association>
+        <Association Name="ClassExam">
+          <End Type="ManagementModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="ManagementModel.Exam" Role="Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamTeacher">
+          <End Type="ManagementModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="ManagementModel.Exam" Role="Exam" Multiplicity="*" />
+        </Association>
+        <EnumType Name="Priority">
+          <Member Name="Extreme" />
+          <Member Name="Important" />
+          <Member Name="Suggested" />
+          <Member Name="Dismissable" />
+        </EnumType>
+        <EntityType Name="ExamResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Exam" Relationship="ManagementModel.ExamExamResult" FromRole="ExamResult" ToRole="Exam" />
+          <Property Name="ExamId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ExamExamResult">
+          <End Type="ManagementModel.Exam" Role="Exam" Multiplicity="1" >
+          </End>
+          <End Type="ManagementModel.ExamResult" Role="ExamResult" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExamResult">
+              <PropertyRef Name="ExamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ManagementModelStoreContainer" CdmEntityContainer="ManagementModelContainer">
+    <EntitySetMapping Name="PersonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Person)">
+        <MappingFragment StoreEntitySet="PersonSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Student)">
+        <MappingFragment StoreEntitySet="PersonSet_Student">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Parent)">
+        <MappingFragment StoreEntitySet="PersonSet_Parent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="WeChat" ColumnName="WeChat" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Teacher)">
+        <MappingFragment StoreEntitySet="PersonSet_Teacher">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="SecondarySubject" ColumnName="SecondarySubject" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="WorkNumber" ColumnName="WorkNumber" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Class)">
+        <MappingFragment StoreEntitySet="ClassSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Exam)">
+        <MappingFragment StoreEntitySet="ExamSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+          <ScalarProperty Name="Topic" ColumnName="Topic" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="Importance" ColumnName="Importance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.Department)">
+        <MappingFragment StoreEntitySet="DepartmentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamResultSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ManagementModel.ExamResult)">
+        <MappingFragment StoreEntitySet="ExamResultSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
+          <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Headmaster" TypeName="ManagementModel.Headmaster" StoreEntitySet="ClassSet">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="Id" ColumnName="Headmaster_Id" />
+      </EndProperty>
+      <EndProperty Name="Class">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClassTeacher" TypeName="ManagementModel.ClassTeacher" StoreEntitySet="ClassTeacher">
+      <EndProperty Name="Class">
+        <ScalarProperty Name="Id" ColumnName="Classes_Id" />
+      </EndProperty>
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="Id" ColumnName="Teachers_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DeanOfDepartment" TypeName="ManagementModel.DeanOfDepartment" StoreEntitySet="DepartmentSet">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="Id" ColumnName="Dean_Id" />
+      </EndProperty>
+      <EndProperty Name="Department">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExamTeacher" TypeName="ManagementModel.ExamTeacher" StoreEntitySet="ExamSet">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="Id" ColumnName="Teacher_Id" />
+      </EndProperty>
+      <EndProperty Name="Exam">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
